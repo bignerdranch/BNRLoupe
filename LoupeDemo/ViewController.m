@@ -26,7 +26,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    _loupe = [[BNRLoupe alloc] initWithDiameter:80 offset:60 offsetAngle:3*M_PI_4 constraintsRect:self.view.bounds edgeClearance:10];
+    _loupe = [[BNRLoupe alloc] initWithDiameter:100 offset:100 offsetAngle:3*M_PI_4 constraintsRect:self.view.bounds edgeClearance:10];
     _loupe.image = self.imageView.image;
 }
 

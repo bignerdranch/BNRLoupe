@@ -27,6 +27,12 @@ typedef struct  {
     LoupeConstraintSense sense;
 } LoupeConstraint;
 
+#define kBNRLoupeAnimationTimeThreshold 0.05
+#define kBNRLoupeAnimationDistanceThreshold 2
+#define kBNRLoupeAnimationDuration 0.3
+
+#define kBNRLoupeConstraintAnimationDivisor 1000
+
 @interface BNRLoupe () {
     CGPoint _position;
     CGFloat _diameter;
@@ -47,11 +53,12 @@ typedef struct  {
     CGPoint _savedOriginPoint;
     
     CGPoint _previousScreenPoint;
+    NSTimeInterval _lastUpdate;
 }
 
 @property (nonatomic, strong) CALayer *contentLayer;
 
-- (void)setContentsCenter:(CGPoint)point screenDistanceTraveled:(CGFloat)distance;
+- (void)setContentsCenter:(CGPoint)point shouldAnimate:(BOOL)shouldAnimate;
 
 - (BOOL)constrainOffsetFromOriginPoint:(CGPoint)originPoint;
 
@@ -147,34 +154,35 @@ typedef struct  {
     _overlayLayer.position = _position;
     
     [CATransaction begin];
-    [CATransaction setAnimationDuration:0.16];
-    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
-    
-    // Position animation
-    CABasicAnimation *contentPosition = [CABasicAnimation animationWithKeyPath:@"position"];
-    contentPosition.fromValue = [NSValue valueWithCGPoint:originPoint];
-    contentPosition.toValue = [NSValue valueWithCGPoint:_position];
-    CABasicAnimation *overlayPosition = [CABasicAnimation animationWithKeyPath:@"position"];
-    overlayPosition.fromValue = [NSValue valueWithCGPoint:originPoint];
-    overlayPosition.toValue = [NSValue valueWithCGPoint:_position];
-    
-    // Scale animation
-    CABasicAnimation *contentScale = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    contentScale.fromValue = @(0);
-    contentScale.toValue = @(1);
-    CABasicAnimation *overlayScale = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    overlayScale.fromValue = @(0);
-    overlayScale.toValue = @(1);
-    
-    // Watch one (any will do) so we can react to the animations completing
-    [contentPosition setDelegate:self];
-    
-    // Apply them
-    [_contentLayer addAnimation:contentPosition forKey:@"appearance animation"];
-    [_contentLayer addAnimation:contentScale forKey:nil];
-    [_overlayLayer addAnimation:overlayPosition forKey:nil];
-    [_overlayLayer addAnimation:overlayScale forKey:nil];
-    
+    {
+        [CATransaction setAnimationDuration:0.16];
+        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
+        
+        // Position animation
+        CABasicAnimation *contentPosition = [CABasicAnimation animationWithKeyPath:@"position"];
+        contentPosition.fromValue = [NSValue valueWithCGPoint:originPoint];
+        contentPosition.toValue = [NSValue valueWithCGPoint:_position];
+        CABasicAnimation *overlayPosition = [CABasicAnimation animationWithKeyPath:@"position"];
+        overlayPosition.fromValue = [NSValue valueWithCGPoint:originPoint];
+        overlayPosition.toValue = [NSValue valueWithCGPoint:_position];
+        
+        // Scale animation
+        CABasicAnimation *contentScale = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+        contentScale.fromValue = @(0);
+        contentScale.toValue = @(1);
+        CABasicAnimation *overlayScale = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+        overlayScale.fromValue = @(0);
+        overlayScale.toValue = @(1);
+        
+        // Watch one (any will do) so we can react to the animations completing
+        [contentPosition setDelegate:self];
+        
+        // Apply them
+        [_contentLayer addAnimation:contentPosition forKey:@"appearance animation"];
+        [_contentLayer addAnimation:contentScale forKey:nil];
+        [_overlayLayer addAnimation:overlayPosition forKey:nil];
+        [_overlayLayer addAnimation:overlayScale forKey:nil];
+    }
     [CATransaction commit];
 }
 
@@ -182,51 +190,57 @@ typedef struct  {
     _appearanceAnimationInProgress = NO;
 }
 
-//--! There is one bug here; in the unlikely case that the loupe is active while the Done or Cancel button is hit,
-// this object will be retained past its useful life. This means, in turn, that the contents layer will retain
-// a ref to the image, and a large quantity of memory will be leaked.
 - (void)removeFromView {
+    _lastUpdate = 0;
+    _previousScreenPoint = CGPointMake(-CGFLOAT_MAX, -CGFLOAT_MAX);
     [_contentLayer removeFromSuperlayer];
     [_overlayLayer removeFromSuperlayer];
 }
 
 - (void)setImage:(UIImage *)image {
     _image = image;
-//    _contentLayer.transform = CATransform3DMakeRotation(M_PI_2, 0, 0, 1);
     _contentLayer.contents = (__bridge id) [_image CGImage];
 }
 
-- (void)setContentsCenter:(CGPoint)point screenDistanceTraveled:(CGFloat)distance {
-    CGFloat loupePositionXScaled = 0;
-    CGFloat loupePositionYScaled = 0;
-    CGFloat loupeDiameterWidthScaled = 0;
-    CGFloat loupeDiameterHeightScaled = 0;
-    CGPoint transformedPoint;
+- (void)setContentsCenter:(CGPoint)point shouldAnimate:(BOOL)shouldAnimate {
+    // Shift so that we're at the intersection of boundaries between pixels, not
+    // in the center of a pixel. This will result in a faithful pixel-by-pixel
+    // rendering.
+    point.x -= 0.5;
+    point.y -= 0.5;
     
-    loupeDiameterWidthScaled = _diameter / _image.size.width;
-    loupeDiameterHeightScaled = _diameter / _image.size.height;
-    transformedPoint.x = point.x / _image.size.width;
-    transformedPoint.y = point.y / _image.size.height;    
-    loupePositionXScaled = transformedPoint.x - loupeDiameterWidthScaled / 2;
-    loupePositionYScaled = transformedPoint.y - loupeDiameterHeightScaled / 2;
-    
+    // Calculate the contents rect. The rect is always given relative to
+    // a coordinate system that goes from (0, 0) to (1, 1).
+    CGFloat loupeDiameterWidthScaled = _diameter / _image.size.width;
+    CGFloat loupeDiameterHeightScaled = _diameter / _image.size.height;
+    CGFloat loupePositionXScaled = (point.x / _image.size.width) - loupeDiameterWidthScaled / 2;
+    CGFloat loupePositionYScaled = (point.y / _image.size.height) - loupeDiameterHeightScaled / 2;
     CGRect loupeRect = CGRectMake(loupePositionXScaled, loupePositionYScaled, loupeDiameterWidthScaled, loupeDiameterHeightScaled);
+    
     [CATransaction begin];
-    if (distance < 2) {
-        [CATransaction setAnimationDuration:0.3];
-    } else {
-        [CATransaction setDisableActions:YES];
+    {
+        if (shouldAnimate)
+            [CATransaction setAnimationDuration:kBNRLoupeAnimationDuration];
+        else
+            [CATransaction setDisableActions:YES];
+        _contentLayer.contentsRect = loupeRect;
     }
-    _contentLayer.contentsRect = loupeRect;
     [CATransaction commit];
 }
 
 - (void)setScreenPoint:(CGPoint)point {
+    NSTimeInterval now = [NSDate timeIntervalSinceReferenceDate];
     CGFloat distanceTraveled = hypot(point.x - _previousScreenPoint.x, point.y - _previousScreenPoint.y);
-    distanceTraveled = 100; // Killing smooth contents center animations for now
-    [self setContentsCenter:CGPointApplyAffineTransform(point, self.screenToImageTransform) screenDistanceTraveled:distanceTraveled];
-    _previousScreenPoint = point;
+    BOOL animate = NO;
+    if (now - _lastUpdate >= kBNRLoupeAnimationTimeThreshold && distanceTraveled <= kBNRLoupeAnimationDistanceThreshold)
+        animate = YES;
+    CGPoint imagePoint = CGPointApplyAffineTransform(point, self.screenToImageTransform);
+    imagePoint.x = round(imagePoint.x);
+    imagePoint.y = round(imagePoint.y);
+    [self setContentsCenter:imagePoint shouldAnimate:animate];
     
+    // Don't bother setting position if we're animating in.
+    //--TODO: maybe adjust target of animation?
     if (_appearanceAnimationInProgress)
         return;
     
@@ -234,24 +248,31 @@ typedef struct  {
     _position.y = point.y + _offset.y;
     CGPoint unconstrainedPosition = _position;
     BOOL constraintsBroken = [self constrainOffsetFromOriginPoint:point];
-    CGFloat distance = hypot(unconstrainedPosition.x - _position.x, unconstrainedPosition.y - _position.y);
+    CGFloat constraintDelta = 0;
+    if (constraintsBroken)
+        constraintDelta = hypot(unconstrainedPosition.x - _position.x, unconstrainedPosition.y - _position.y);
     
     if (_shouldAnimateAppearance) {
         [self animateAppearanceFromOriginPoint:point];
     } else {
         [CATransaction begin];
-        if (constraintsBroken || distanceTraveled < 2)
-            [CATransaction setDisableActions:NO];
-        else
-            [CATransaction setDisableActions:YES];
-        if (distance > 0)
-            [CATransaction setAnimationDuration:distance / 1000];
-        else if (distanceTraveled < 2)
-            [CATransaction setAnimationDuration:0.3];
-        _contentLayer.position = _position;
-        _overlayLayer.position = _position;
+        {
+            if (constraintsBroken || animate)
+                [CATransaction setDisableActions:NO];
+            else
+                [CATransaction setDisableActions:YES];
+            if (constraintDelta > 0)
+                [CATransaction setAnimationDuration:constraintDelta / kBNRLoupeConstraintAnimationDivisor];
+            else if (animate)
+                [CATransaction setAnimationDuration:kBNRLoupeAnimationDuration];
+            _contentLayer.position = _position;
+            _overlayLayer.position = _position;
+        }
         [CATransaction commit];
     }
+    
+    _lastUpdate = now;
+    _previousScreenPoint = point;
 }
 
 - (BOOL)constrainOffsetFromOriginPoint:(CGPoint)originPoint {
