@@ -19,8 +19,6 @@
 
 - (void)loupeRecognizerEvent:(UIGestureRecognizer *)recognizer;
 
-- (void)updateLoupeTransform;
-
 @end
 
 @implementation ZoomViewController
@@ -90,14 +88,12 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    [self updateLoupeTransform];
+    CGPoint o = _scrollView.contentOffset;
+    CGSize s = _scrollView.bounds.size;
+    [_loupe setConstraintsRect:CGRectMake(o.x, o.y, s.width, s.height)];
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    [self updateLoupeTransform];
-}
-
-- (void)updateLoupeTransform {
     CGFloat imagePixelsPerScreenPixel = 1 / _scrollView.zoomScale;
     _loupe.screenToImageTransform = CGAffineTransformMakeScale(imagePixelsPerScreenPixel, imagePixelsPerScreenPixel);
 }
