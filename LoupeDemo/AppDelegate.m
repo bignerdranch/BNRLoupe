@@ -10,6 +10,7 @@
 
 #import "StaticViewController.h"
 #import "ZoomViewController.h"
+#import "CustomImageViewController.h"
 
 @implementation AppDelegate
 
@@ -19,9 +20,10 @@
     // Override point for customization after application launch.
     StaticViewController *staticViewController = [[StaticViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     ZoomViewController *zoomViewController = [[ZoomViewController alloc] initWithImage:[UIImage imageNamed:@"Dec09_1.jpg"]];
+    CustomImageViewController *customImageViewController = [[CustomImageViewController alloc] initWithNibName:nil bundle:nil];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
-    [tabBarController setViewControllers:@[staticViewController, zoomViewController]];
+    [tabBarController setViewControllers:@[staticViewController, zoomViewController, customImageViewController]];
     self.viewController = tabBarController;
     
     

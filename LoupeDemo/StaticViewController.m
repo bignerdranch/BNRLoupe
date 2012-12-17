@@ -11,9 +11,6 @@
 
 @interface StaticViewController () {
     BNRLoupe *_loupe;
-    
-    CGFloat _imagePixelsPerScreenPixel;
-    CGPoint _imageOffset;
 }
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
@@ -47,17 +44,17 @@
     CGFloat myHeight = self.view.bounds.size.height;
     CGFloat widthRatio = imageActualWidth / myWidth;
     CGFloat heightRatio = imageActualHeight / myHeight;
-    _imagePixelsPerScreenPixel = MAX(widthRatio, heightRatio);
-    _imageOffset = CGPointMake(0, 0);
+    CGFloat imagePixelsPerScreenPixel = MAX(widthRatio, heightRatio);
+    CGPoint imageOffset = CGPointMake(0, 0);
     if (widthRatio != heightRatio) {
         if (widthRatio > heightRatio) {
-            _imageOffset.y = (myHeight - (imageActualHeight / _imagePixelsPerScreenPixel)) / 2;
+            imageOffset.y = (myHeight - (imageActualHeight / imagePixelsPerScreenPixel)) / 2;
         } else {
-            _imageOffset.x = (myWidth - (imageActualWidth / _imagePixelsPerScreenPixel)) / 2;
+            imageOffset.x = (myWidth - (imageActualWidth / imagePixelsPerScreenPixel)) / 2;
         }
     }
     
-    _loupe.screenToImageTransform = CGAffineTransformTranslate(CGAffineTransformMakeScale(_imagePixelsPerScreenPixel, _imagePixelsPerScreenPixel), -_imageOffset.x, -_imageOffset.y);
+    _loupe.screenToImageTransform = CGAffineTransformTranslate(CGAffineTransformMakeScale(imagePixelsPerScreenPixel, imagePixelsPerScreenPixel), -imageOffset.x, -imageOffset.y);
 }
 
 - (void)didReceiveMemoryWarning

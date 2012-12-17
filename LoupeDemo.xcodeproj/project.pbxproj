@@ -25,6 +25,9 @@
 		5ADB4ACC167F86E600DA8906 /* ZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB4ACA167F86E600DA8906 /* ZoomViewController.m */; };
 		5ADB4ACD167F86E600DA8906 /* ZoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ADB4ACB167F86E600DA8906 /* ZoomViewController.xib */; };
 		5ADB4AD4167F905C00DA8906 /* BNRLoupeTouchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB4AD3167F905C00DA8906 /* BNRLoupeTouchGestureRecognizer.m */; };
+		5ADB4AD7167FA6BE00DA8906 /* BNRLoupeImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB4AD6167FA6BE00DA8906 /* BNRLoupeImageView.m */; };
+		5ADB4ADB167FAA0500DA8906 /* CustomImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB4AD9167FAA0400DA8906 /* CustomImageViewController.m */; };
+		5ADB4ADC167FAA0500DA8906 /* CustomImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ADB4ADA167FAA0500DA8906 /* CustomImageViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +57,11 @@
 		5ADB4ACB167F86E600DA8906 /* ZoomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZoomViewController.xib; sourceTree = "<group>"; };
 		5ADB4AD2167F905C00DA8906 /* BNRLoupeTouchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRLoupeTouchGestureRecognizer.h; sourceTree = "<group>"; };
 		5ADB4AD3167F905C00DA8906 /* BNRLoupeTouchGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRLoupeTouchGestureRecognizer.m; sourceTree = "<group>"; };
+		5ADB4AD5167FA6BD00DA8906 /* BNRLoupeImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRLoupeImageView.h; sourceTree = "<group>"; };
+		5ADB4AD6167FA6BE00DA8906 /* BNRLoupeImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRLoupeImageView.m; sourceTree = "<group>"; };
+		5ADB4AD8167FAA0400DA8906 /* CustomImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImageViewController.h; sourceTree = "<group>"; };
+		5ADB4AD9167FAA0400DA8906 /* CustomImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImageViewController.m; sourceTree = "<group>"; };
+		5ADB4ADA167FAA0500DA8906 /* CustomImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomImageViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,12 +116,17 @@
 				5A230F2A16790D6800A5BFD5 /* AppDelegate.m */,
 				5A230F4116790DA100A5BFD5 /* BNRLoupe.h */,
 				5A230F4216790DA100A5BFD5 /* BNRLoupe.m */,
+				5ADB4AD5167FA6BD00DA8906 /* BNRLoupeImageView.h */,
+				5ADB4AD6167FA6BE00DA8906 /* BNRLoupeImageView.m */,
 				5ADB4AC4167F84BB00DA8906 /* StaticViewController.h */,
 				5ADB4AC5167F84BB00DA8906 /* StaticViewController.m */,
 				5A230F3516790D6800A5BFD5 /* StaticViewController.xib */,
 				5ADB4AC9167F86E600DA8906 /* ZoomViewController.h */,
 				5ADB4ACA167F86E600DA8906 /* ZoomViewController.m */,
 				5ADB4ACB167F86E600DA8906 /* ZoomViewController.xib */,
+				5ADB4AD8167FAA0400DA8906 /* CustomImageViewController.h */,
+				5ADB4AD9167FAA0400DA8906 /* CustomImageViewController.m */,
+				5ADB4ADA167FAA0500DA8906 /* CustomImageViewController.xib */,
 				5A230F2116790D6800A5BFD5 /* Supporting Files */,
 			);
 			path = LoupeDemo;
@@ -194,6 +207,7 @@
 				5A230F481679133E00A5BFD5 /* Dec09_1.jpg in Resources */,
 				5A230F4C16791A8800A5BFD5 /* blah.png in Resources */,
 				5ADB4ACD167F86E600DA8906 /* ZoomViewController.xib in Resources */,
+				5ADB4ADC167FAA0500DA8906 /* CustomImageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +224,8 @@
 				5ADB4AC6167F84BB00DA8906 /* StaticViewController.m in Sources */,
 				5ADB4ACC167F86E600DA8906 /* ZoomViewController.m in Sources */,
 				5ADB4AD4167F905C00DA8906 /* BNRLoupeTouchGestureRecognizer.m in Sources */,
+				5ADB4AD7167FA6BE00DA8906 /* BNRLoupeImageView.m in Sources */,
+				5ADB4ADB167FAA0500DA8906 /* CustomImageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

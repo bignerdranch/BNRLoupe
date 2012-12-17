@@ -40,8 +40,6 @@ typedef struct  {
     CGFloat _diameter;
     CGFloat _edgeClearance;
     
-    // This is the display angle; the actual offset X and Y
-    // values may be different based on device orientation.
     CGFloat _offsetAngle;
     CGFloat _offsetDiagonal;
     CGPoint _offset;
@@ -63,8 +61,6 @@ typedef struct  {
 - (void)setContentsCenter:(CGPoint)point shouldAnimate:(BOOL)shouldAnimate;
 
 - (BOOL)constrainOffsetFromOriginPoint:(CGPoint)originPoint;
-
-- (void)updateDisplayOffsetAngleForCurrentOrientation;
 
 - (void)updateConstraints;
 
