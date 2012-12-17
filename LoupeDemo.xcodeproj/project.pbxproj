@@ -24,6 +24,7 @@
 		5ADB4AC6167F84BB00DA8906 /* StaticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB4AC5167F84BB00DA8906 /* StaticViewController.m */; };
 		5ADB4ACC167F86E600DA8906 /* ZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB4ACA167F86E600DA8906 /* ZoomViewController.m */; };
 		5ADB4ACD167F86E600DA8906 /* ZoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ADB4ACB167F86E600DA8906 /* ZoomViewController.xib */; };
+		5ADB4AD4167F905C00DA8906 /* BNRLoupeTouchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB4AD3167F905C00DA8906 /* BNRLoupeTouchGestureRecognizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,8 @@
 		5ADB4AC9167F86E600DA8906 /* ZoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomViewController.h; sourceTree = "<group>"; };
 		5ADB4ACA167F86E600DA8906 /* ZoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomViewController.m; sourceTree = "<group>"; };
 		5ADB4ACB167F86E600DA8906 /* ZoomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZoomViewController.xib; sourceTree = "<group>"; };
+		5ADB4AD2167F905C00DA8906 /* BNRLoupeTouchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRLoupeTouchGestureRecognizer.h; sourceTree = "<group>"; };
+		5ADB4AD3167F905C00DA8906 /* BNRLoupeTouchGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRLoupeTouchGestureRecognizer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +102,8 @@
 		5A230F2016790D6800A5BFD5 /* LoupeDemo */ = {
 			isa = PBXGroup;
 			children = (
+				5ADB4AD2167F905C00DA8906 /* BNRLoupeTouchGestureRecognizer.h */,
+				5ADB4AD3167F905C00DA8906 /* BNRLoupeTouchGestureRecognizer.m */,
 				5A230F2916790D6800A5BFD5 /* AppDelegate.h */,
 				5A230F2A16790D6800A5BFD5 /* AppDelegate.m */,
 				5A230F4116790DA100A5BFD5 /* BNRLoupe.h */,
@@ -204,6 +209,7 @@
 				5A230F4316790DA100A5BFD5 /* BNRLoupe.m in Sources */,
 				5ADB4AC6167F84BB00DA8906 /* StaticViewController.m in Sources */,
 				5ADB4ACC167F86E600DA8906 /* ZoomViewController.m in Sources */,
+				5ADB4AD4167F905C00DA8906 /* BNRLoupeTouchGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
