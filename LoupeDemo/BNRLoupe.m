@@ -96,17 +96,6 @@ typedef struct  {
     return self;
 }
 
-- (void)deviceRotated:(NSNotification *)notification {
-    [self updateDisplayOffsetAngleForCurrentOrientation];
-}
-
-- (void)updateDisplayOffsetAngleForCurrentOrientation {
-    [self calculateOrthogonalOffsetsFromDisplayOffsetAngle:_offsetAngle];
-    
-    // Update constraints
-    [self updateConstraints];
-}
-
 - (void)setConstraintsRect:(CGRect)constraintsRect {
     _constraintsRect = constraintsRect;
     [self updateConstraints];
@@ -134,13 +123,9 @@ typedef struct  {
 // Setting the offset angle as it should appear onscreen relative to the touch point.
 - (void)setOffsetAngle:(CGFloat)offsetAngle {
     _offsetAngle = offsetAngle;
-    [self updateDisplayOffsetAngleForCurrentOrientation];
-}
-
-// This is not a public method; the offset angle here is rotated relative to device orientation.
-- (void)calculateOrthogonalOffsetsFromDisplayOffsetAngle:(CGFloat)offsetAngle {
-    _offset.x = cos(offsetAngle) * _offsetDiagonal;
-    _offset.y = -sin(offsetAngle) * _offsetDiagonal;
+    _offset.x = cos(_offsetAngle) * _offsetDiagonal;
+    _offset.y = -sin(_offsetAngle) * _offsetDiagonal;
+    [self updateConstraints];
 }
 
 - (void)displayInView:(UIView *)view {
