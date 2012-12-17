@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 Owen Mathews. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "StaticViewController.h"
 #import "BNRLoupe.h"
 
-@interface ViewController () {
+@interface StaticViewController () {
     BNRLoupe *_loupe;
     
     CGFloat _imagePixelsPerScreenPixel;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation ViewController
+@implementation StaticViewController
 
 - (void)viewDidLoad
 {
