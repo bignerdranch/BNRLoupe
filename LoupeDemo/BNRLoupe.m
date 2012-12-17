@@ -33,6 +33,8 @@ typedef struct  {
 
 #define kBNRLoupeConstraintAnimationDivisor 1000
 
+#define kBNRLoupeAppearanceAnimationDuration 0.16
+
 @interface BNRLoupe () {
     CGPoint _position;
     CGFloat _diameter;
@@ -155,7 +157,7 @@ typedef struct  {
     
     [CATransaction begin];
     {
-        [CATransaction setAnimationDuration:0.16];
+        [CATransaction setAnimationDuration:kBNRLoupeAppearanceAnimationDuration];
         [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
         
         // Position animation
