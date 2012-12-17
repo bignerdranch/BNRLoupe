@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "StaticViewController.h"
+#import "ZoomViewController.h"
 
 @implementation AppDelegate
 
@@ -16,7 +17,14 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[StaticViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+    StaticViewController *staticViewController = [[StaticViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+    ZoomViewController *zoomViewController = [[ZoomViewController alloc] initWithImage:[UIImage imageNamed:@"Dec09_1.jpg"]];
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
+    [tabBarController setViewControllers:@[staticViewController, zoomViewController]];
+    self.viewController = tabBarController;
+    
+    
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
