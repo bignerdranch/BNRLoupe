@@ -18,8 +18,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    StaticViewController *staticViewController = [[StaticViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    ZoomViewController *zoomViewController = [[ZoomViewController alloc] initWithImage:[UIImage imageNamed:@"Dec09_1.jpg"]];
+    StaticViewController *staticViewController = [[StaticViewController alloc] initWithNibName:@"StaticViewController" bundle:nil];
+    ZoomViewController *zoomViewController = [[ZoomViewController alloc] initWithImage:[UIImage imageNamed:@"brown and yellow.jpg"]];
     CustomImageViewController *customImageViewController = [[CustomImageViewController alloc] initWithNibName:nil bundle:nil];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];

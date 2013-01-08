@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.loupeImageView.image = [UIImage imageNamed:@"Dec09_1.jpg"];
+    self.loupeImageView.image = [UIImage imageNamed:@"brown and yellow.jpg"];
 }
 
 - (void)didReceiveMemoryWarning

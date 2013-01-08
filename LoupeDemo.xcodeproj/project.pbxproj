@@ -19,8 +19,9 @@
 		5A230F3716790D6800A5BFD5 /* StaticViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A230F3516790D6800A5BFD5 /* StaticViewController.xib */; };
 		5A230F4316790DA100A5BFD5 /* BNRLoupe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A230F4216790DA100A5BFD5 /* BNRLoupe.m */; };
 		5A230F4616790F9900A5BFD5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A230F4516790F9900A5BFD5 /* QuartzCore.framework */; };
-		5A230F481679133E00A5BFD5 /* Dec09_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5A230F471679133E00A5BFD5 /* Dec09_1.jpg */; };
+		5A230F481679133E00A5BFD5 /* fractal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5A230F471679133E00A5BFD5 /* fractal.jpg */; };
 		5A230F4C16791A8800A5BFD5 /* blah.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A230F4B16791A8800A5BFD5 /* blah.png */; };
+		5A733E70169C6FE100DAD052 /* brown and yellow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5A733E6F169C6FE100DAD052 /* brown and yellow.jpg */; };
 		5ADB4AC6167F84BB00DA8906 /* StaticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB4AC5167F84BB00DA8906 /* StaticViewController.m */; };
 		5ADB4ACC167F86E600DA8906 /* ZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB4ACA167F86E600DA8906 /* ZoomViewController.m */; };
 		5ADB4ACD167F86E600DA8906 /* ZoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ADB4ACB167F86E600DA8906 /* ZoomViewController.xib */; };
@@ -28,6 +29,7 @@
 		5ADB4AD7167FA6BE00DA8906 /* BNRLoupeImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB4AD6167FA6BE00DA8906 /* BNRLoupeImageView.m */; };
 		5ADB4ADB167FAA0500DA8906 /* CustomImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB4AD9167FAA0400DA8906 /* CustomImageViewController.m */; };
 		5ADB4ADC167FAA0500DA8906 /* CustomImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ADB4ADA167FAA0500DA8906 /* CustomImageViewController.xib */; };
+		5ADB4AE61680EDC500DA8906 /* river.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5ADB4AE51680EDC500DA8906 /* river.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,8 +50,9 @@
 		5A230F4116790DA100A5BFD5 /* BNRLoupe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRLoupe.h; sourceTree = "<group>"; };
 		5A230F4216790DA100A5BFD5 /* BNRLoupe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRLoupe.m; sourceTree = "<group>"; };
 		5A230F4516790F9900A5BFD5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		5A230F471679133E00A5BFD5 /* Dec09_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Dec09_1.jpg; sourceTree = "<group>"; };
+		5A230F471679133E00A5BFD5 /* fractal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fractal.jpg; sourceTree = "<group>"; };
 		5A230F4B16791A8800A5BFD5 /* blah.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blah.png; sourceTree = "<group>"; };
+		5A733E6F169C6FE100DAD052 /* brown and yellow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "brown and yellow.jpg"; sourceTree = "<group>"; };
 		5ADB4AC4167F84BB00DA8906 /* StaticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticViewController.h; sourceTree = "<group>"; };
 		5ADB4AC5167F84BB00DA8906 /* StaticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticViewController.m; sourceTree = "<group>"; };
 		5ADB4AC9167F86E600DA8906 /* ZoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomViewController.h; sourceTree = "<group>"; };
@@ -62,6 +65,7 @@
 		5ADB4AD8167FAA0400DA8906 /* CustomImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImageViewController.h; sourceTree = "<group>"; };
 		5ADB4AD9167FAA0400DA8906 /* CustomImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImageViewController.m; sourceTree = "<group>"; };
 		5ADB4ADA167FAA0500DA8906 /* CustomImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomImageViewController.xib; sourceTree = "<group>"; };
+		5ADB4AE51680EDC500DA8906 /* river.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = river.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,8 +139,10 @@
 		5A230F2116790D6800A5BFD5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5ADB4AE51680EDC500DA8906 /* river.jpg */,
 				5A230F4B16791A8800A5BFD5 /* blah.png */,
-				5A230F471679133E00A5BFD5 /* Dec09_1.jpg */,
+				5A733E6F169C6FE100DAD052 /* brown and yellow.jpg */,
+				5A230F471679133E00A5BFD5 /* fractal.jpg */,
 				5A230F2216790D6800A5BFD5 /* LoupeDemo-Info.plist */,
 				5A230F2316790D6800A5BFD5 /* InfoPlist.strings */,
 				5A230F2616790D6800A5BFD5 /* main.m */,
@@ -204,10 +210,12 @@
 				5A230F2F16790D6800A5BFD5 /* Default@2x.png in Resources */,
 				5A230F3116790D6800A5BFD5 /* Default-568h@2x.png in Resources */,
 				5A230F3716790D6800A5BFD5 /* StaticViewController.xib in Resources */,
-				5A230F481679133E00A5BFD5 /* Dec09_1.jpg in Resources */,
+				5A230F481679133E00A5BFD5 /* fractal.jpg in Resources */,
 				5A230F4C16791A8800A5BFD5 /* blah.png in Resources */,
 				5ADB4ACD167F86E600DA8906 /* ZoomViewController.xib in Resources */,
 				5ADB4ADC167FAA0500DA8906 /* CustomImageViewController.xib in Resources */,
+				5ADB4AE61680EDC500DA8906 /* river.jpg in Resources */,
+				5A733E70169C6FE100DAD052 /* brown and yellow.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

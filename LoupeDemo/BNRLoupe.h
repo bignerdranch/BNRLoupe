@@ -18,6 +18,8 @@
 
 - (id)initWithDiameter:(CGFloat)diameter offset:(CGFloat)offset offsetAngle:(CGFloat)angle constraintsRect:(CGRect)rect edgeClearance:(CGFloat)clearance;
 
+- (void)setConstraintsRect:(CGRect)constraintsRect;
+
 - (void)displayInView:(UIView *)view;
 
 - (void)removeFromView;

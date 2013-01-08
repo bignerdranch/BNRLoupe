@@ -186,12 +186,6 @@ typedef struct  {
 }
 
 - (void)setContentsCenter:(CGPoint)point shouldAnimate:(BOOL)shouldAnimate {
-    // Shift so that we're at the intersection of boundaries between pixels, not
-    // in the center of a pixel. This will result in a faithful pixel-by-pixel
-    // rendering.
-    point.x -= 0.5;
-    point.y -= 0.5;
-    
     // Calculate the contents rect. The rect is always given relative to
     // a coordinate system that goes from (0, 0) to (1, 1).
     CGFloat loupeDiameterWidthScaled = _diameter / _image.size.width;
@@ -212,11 +206,14 @@ typedef struct  {
 }
 
 - (void)setScreenPoint:(CGPoint)point {
+    // Determine if we've moved a small enough distance to warrant animating
     NSTimeInterval now = [NSDate timeIntervalSinceReferenceDate];
     CGFloat distanceTraveled = hypot(point.x - _previousScreenPoint.x, point.y - _previousScreenPoint.y);
     BOOL animate = NO;
     if (now - _lastUpdate >= kBNRLoupeAnimationTimeThreshold && distanceTraveled <= kBNRLoupeAnimationDistanceThreshold)
         animate = YES;
+    
+    // Find the point in the image and update loupe contents
     CGPoint imagePoint = CGPointApplyAffineTransform(point, self.screenToImageTransform);
     imagePoint.x = round(imagePoint.x);
     imagePoint.y = round(imagePoint.y);
@@ -227,6 +224,7 @@ typedef struct  {
     if (_appearanceAnimationInProgress)
         return;
     
+    // Calculate position of loupe
     _position.x = point.x + _offset.x;
     _position.y = point.y + _offset.y;
     CGPoint unconstrainedPosition = _position;
@@ -236,6 +234,7 @@ typedef struct  {
         constraintDelta = hypot(unconstrainedPosition.x - _position.x, unconstrainedPosition.y - _position.y);
     
     if (_shouldAnimateAppearance) {
+        // Flag was set by displayInView:
         [self animateAppearanceFromOriginPoint:point];
     } else {
         [CATransaction begin];

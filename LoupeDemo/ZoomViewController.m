@@ -17,6 +17,8 @@
     UIImageView *_imageView;
 }
 
+@property (nonatomic, weak) IBOutlet UILabel *debugLabel;
+
 - (void)loupeRecognizerEvent:(UIGestureRecognizer *)recognizer;
 
 @end
@@ -56,11 +58,13 @@
     [_scrollView addGestureRecognizer:loupeRecognizer];
     for (UIGestureRecognizer *recognizer in _scrollView.gestureRecognizers) {
         [recognizer requireGestureRecognizerToFail:loupeRecognizer];
-        if ([recognizer isKindOfClass:[UIPinchGestureRecognizer class]])
-            loupeRecognizer.pinchGestureRecognizer = (UIPinchGestureRecognizer *)recognizer;
-        if ([recognizer isKindOfClass:[UIPanGestureRecognizer class]])
-            loupeRecognizer.panGestureRecognizer = (UIPanGestureRecognizer *)recognizer;
     }
+    
+//    loupeRecognizer.debugLabel = _debugLabel;
+//    _debugLabel.text = @"Debug";
+//    _debugLabel.textColor = [UIColor redColor];
+//    _debugLabel.numberOfLines = 4;
+//    _debugLabel.frame = CGRectMake(0, 380, 320, 100);
 }
 
 - (void)loupeRecognizerEvent:(UIGestureRecognizer *)recognizer {

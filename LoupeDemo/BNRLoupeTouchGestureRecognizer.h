@@ -10,9 +10,6 @@
 
 @interface BNRLoupeTouchGestureRecognizer : UIGestureRecognizer <UIGestureRecognizerDelegate>
 
-@property (nonatomic, weak) UIPinchGestureRecognizer *pinchGestureRecognizer;
-@property (nonatomic, weak) UIPanGestureRecognizer *panGestureRecognizer;
-
 @property (nonatomic, weak) UILabel *debugLabel;
 
 @end

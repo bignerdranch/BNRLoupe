@@ -73,8 +73,8 @@ static NSMutableString *_logString;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     CATLogReset;
-    if (_trackedTouch) {
-        CATLog(@"touchesBegan: _trackedTouch already set; ignoring this touch.");
+    if (_trackedTouch || touches.count > 1) {
+        CATLog(@"touchesBegan: _trackedTouch already set or multiple touches began; ignoring this touch.");
         for (UITouch *touch in touches)
             [self ignoreTouch:touch forEvent:event];
         CATLogDisplay;
@@ -132,10 +132,7 @@ static NSMutableString *_logString;
             CATLog(@"Ignoring a touch; was not the tracked touch or my state was POSSIBLE");
             [self ignoreTouch:touch forEvent:event];
         } else {
-            if (_pinchGestureRecognizer && _pinchGestureRecognizer.state != UIGestureRecognizerStatePossible) {
-//                CATLog(@"Ignoring a touch; pinch gesture recognizer owns it");
-//                [self ignoreTouch:_trackedTouch forEvent:event];
-            } else if (self.state != UIGestureRecognizerStateChanged) {
+            if (self.state != UIGestureRecognizerStateChanged) {
                 CATLog(@"** transitioning to state CHANGED");
                 self.state = UIGestureRecognizerStateChanged;
             }
